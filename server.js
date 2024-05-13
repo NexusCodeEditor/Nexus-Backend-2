@@ -18,7 +18,7 @@ const io = new Server(server, {
 
 const userSockerMap = {};
 app.use(cors({
-  origin: process.env.FRONTENT_URL,
+  origin: "*",
   credentials: true,
   methods: ["GET", "POST","DELETE","PUT"],
 }))
