@@ -8,6 +8,11 @@ import cors from 'cors'
 config();
 
 const app = express();
+app.use(cors({
+  origin: process.env.FRONTENT_URL,
+  credentials: true,
+  methods: ["GET", "POST","DELETE","PUT"],
+}))
 const server = http.createServer(app);
 const io = new Server(server, {
   cors:{
@@ -17,11 +22,6 @@ const io = new Server(server, {
 });
 
 const userSockerMap = {};
-app.use(cors({
-  origin: "*",
-  credentials: true,
-  methods: ["GET", "POST","DELETE","PUT"],
-}))
 const CodeData = {
   roomId: "code",
 };
@@ -39,9 +39,9 @@ const getAllConnectedClients = (roomId) => {
   return data;
 };
 
-app.get("/", (req, res) => {
-  res.send("WELCOME TO NEXUS BACKEND !.");
-});
+// app.get("/", (req, res) => {
+//   res.send("WELCOME TO NEXUS BACKEND !.");
+// });
 
 io.on("connection", (socket) => {
   // console.log("socket connected", socket.id);
@@ -90,7 +90,3 @@ server.listen(PORT, () => {
   console.log(`Listening on PORT : ${PORT}`);
 });
 
-
-// pk0@gmail.com
-// Priyanshu
-// pk9900
